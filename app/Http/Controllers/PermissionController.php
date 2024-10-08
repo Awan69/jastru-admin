@@ -27,11 +27,7 @@ class PermissionController extends Controller
                     $editUrl = route('permissions.edit', $permission->id);
                     $deleteUrl = route('permissions.destroy', $permission->id);
                     return '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>
-                    <form action="' . $deleteUrl . '" method="post" style="display: inline-block">
-                        ' . csrf_field() . '
-                        ' . method_field('DELETE') . '
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                    </form>';
+                <button type="button" id="deletePermission' . $permission->id . '" class="btn btn-sm btn-danger" onclick="deletePermission(' . $permission->id . ')">Delete</button>';
                 })
                 ->rawColumns(['action'])
                 ->toJson();
@@ -85,8 +81,7 @@ class PermissionController extends Controller
 
     public function destroy($permissionId)
     {
-        $permission = Permission::find($permissionId);
-        $permission->delete();
-        return redirect('permissions')->with('status', 'Permission Deleted Successfully');
+        Permission::destroy($permissionId);
+        return response()->json(['success' => 'Permmison deleted successfully']);
     }
 }

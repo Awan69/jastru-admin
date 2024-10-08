@@ -263,6 +263,7 @@
 
                 <!-- Page level custom scripts -->
                 <script src="{{ asset('sb-admin2') }}/js/demo/datatables-demo.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

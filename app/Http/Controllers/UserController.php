@@ -40,11 +40,7 @@ class UserController extends Controller
                     $editUrl = route('users.edit', $user->id);
                     $deleteUrl = route('users.destroy', $user->id);
                     return '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>
-                        <form action="' . $deleteUrl . '" method="post" style="display: inline-block">
-                            ' . csrf_field() . '
-                            ' . method_field('DELETE') . '
-                            <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                        </form>';
+                <button type="button" id="deleteUser' . $user->id . '" class="btn btn-sm btn-danger" onclick="deleteUser (' . $user->id . ')">Hapus</button>';
                 })
                 ->rawColumns(['action'])
                 ->toJson();
@@ -115,18 +111,16 @@ class UserController extends Controller
         return redirect('/users')->with('status', 'User Updated Successfully with roles');
     }
 
-    // public function destroy($userId)
-    // {
-    //     $user = User::findOrFail($userId);
-    //     $user->delete();
-
-    //     return redirect('/users')->with('status', 'User Delete Successfully');
-    // }
-
     public function destroy($userId)
     {
-        // Delete the user
         User::destroy($userId);
-        return redirect()->route('users.index');
+        return response()->json(['success' => 'User  deleted successfully']);
     }
+
+    // public function destroy($userId)
+    // {
+    //     // Delete the user
+    //     User::destroy($userId);
+    //     return redirect()->route('users.index');
+    // }
 }

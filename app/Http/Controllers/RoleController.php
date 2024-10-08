@@ -31,12 +31,8 @@ class RoleController extends Controller
                     $deleteUrl = route('roles.destroy', $role->id);
                     $givePermissionUrl = route('roles.give-permissions', $role->id);
                     return '<a href="' . $givePermissionUrl . '" class="btn btn-sm btn-warning">Add / Edit Role Permission</a>
-                        <a href="' . $editUrl . '" class="btn btn-sm btn-success">Edit</a>
-                        <form action="' . $deleteUrl . '" method="post" style="display: inline-block">
-                            ' . csrf_field() . '
-                            ' . method_field('DELETE') . '
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>';
+                    <a href="' . $editUrl . '" class="btn btn-sm btn-success">Edit</a>
+                    <button type="button" id="deleteRole' . $role->id . '" class="btn btn-sm btn-danger" onclick="deleteRole(' . $role->id . ')">Delete</button>';
                 })
                 ->rawColumns(['action'])
                 ->toJson();
@@ -44,7 +40,6 @@ class RoleController extends Controller
 
         return view('role-permission.role.index');
     }
-
     public function create()
     {
         return view('role-permission.role.create');
@@ -93,9 +88,8 @@ class RoleController extends Controller
 
     public function destroy($roleId)
     {
-        $role = Role::find($roleId);
-        $role->delete();
-        return redirect('roles')->with('status', 'Role Deleted Successfully');
+        Role::destroy($roleId);
+        return response()->json(['success' => 'Role  deleted successfully']);
     }
 
     public function addPermissionToRole($roleId)

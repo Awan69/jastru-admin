@@ -159,6 +159,33 @@
             });
         </script>
 
+        <script>
+            function deleteUser(id) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You want to delete this user?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: "{{ url('users/') }}" + "/" + id,
+                            data: {
+                                "_token": "{{ csrf_token() }}"
+                            },
+                            success: function(data) {
+                                window.location.href = "{{ url('users') }}";
+                            }
+                        });
+                    }
+                });
+            }
+        </script>
+
     </div>
     <!-- /.container-fluid -->
 
