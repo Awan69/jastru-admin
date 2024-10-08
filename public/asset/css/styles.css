@@ -1,0 +1,676 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Align items at the top */
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+}
+
+.mobile-container {
+    width: 100%;
+    max-width: 480px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.header img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    /* Adjusted padding */
+    align-items: center;
+    margin-bottom: 10px;
+    position: fixed;
+    /* Keep the top bar fixed */
+    top: 0;
+    width: 100%;
+    max-width: 480px;
+    /* Ensure it aligns with the container */
+    z-index: 1000;
+    background-color: #fff;
+    /* Add background to top bar */
+    box-sizing: border-box;
+}
+
+.search-bar {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.icons div {
+    margin-left: 10px;
+    position: relative;
+}
+
+.icons div img {
+    width: 25px;
+    height: 25px;
+}
+
+.icons div .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 10px;
+}
+
+.promo-section {
+    background-color: #2980b9;
+    /* Warna latar belakang */
+    color: #000;
+    /* Ubah warna teks menjadi hitam */
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.promo-section .header img {
+    width: 100%;
+    height: auto;
+    /* Menjaga proporsi gambar */
+    object-fit: cover;
+    /* Mengisi area dengan menjaga proporsi gambar */
+    border-radius: 8px;
+}
+
+.balance {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px 15px;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: -10px;
+    box-sizing: border-box;
+}
+
+.balance .amount {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    padding: 0 10px;
+}
+
+.balance .amount img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.balance .amount-value {
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    color: #000;
+    /* Ubah warna teks menjadi hitam */
+}
+
+.balance .amount span {
+    font-size: 14px;
+    display: block;
+    color: #000;
+    /* Ubah warna teks menjadi hitam */
+}
+
+.balance .action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding: 5px;
+    text-align: center;
+}
+
+.balance .action img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.balance .action span {
+    font-size: 12px;
+    display: block;
+    color: #000;
+    /* Ubah warna teks menjadi hitam */
+}
+
+/* Tabs Section */
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 15px;
+    /* Consistent margin with other sections */
+    padding: 10px;
+    background: #f1f1f1;
+    /* Background color for tabs */
+    border-radius: 8px;
+    /* Rounded corners */
+    box-sizing: border-box;
+}
+
+.tabs div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    /* Adjust font size if needed */
+    margin: 5px;
+}
+
+.tabs img {
+    width: 20px;
+    /* Adjust icon size */
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+.tabs button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1;
+    margin: 5px;
+}
+
+.tabs button.active {
+    background-color: #0056b3;
+}
+
+.content {
+    padding-top: 70px;
+    padding-bottom: 160px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.category {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 10px 15px;
+}
+
+.category div {
+    flex: 1 1 calc(33.333% - 10px);
+    box-sizing: border-box;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+}
+
+.category img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+/* Discount Section */
+.discount {
+    font-size: 14px;
+    /* Slightly larger font for visibility */
+    color: #ff0000;
+    /* Red color for visibility */
+    font-weight: bold;
+    margin: 10px 15px;
+    /* Adjust margin */
+    padding: 15px;
+    /* Add padding to create space around the image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    /* Background color for discount section */
+    border-radius: 8px;
+    /* Slightly rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Optional shadow */
+    box-sizing: border-box;
+    /* Ensure padding doesn't add to width */
+}
+
+.discount img {
+    width: 100%;
+    /* Increase width to fill the container */
+    height: auto;
+    /* Maintain aspect ratio */
+    object-fit: cover;
+    /* Ensure the image covers the entire area */
+    border-radius: 8px;
+    /* Slightly rounded corners, remove if you want sharp edges */
+    margin-right: 10px;
+    /* Add space between the image and text */
+}
+
+/* Services Grid Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 columns */
+    gap: 20px;
+    padding: 20px;
+    margin: 10px 15px;
+    /* Consistent margin with other sections */
+}
+
+.service-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.service-item .image-container {
+    background-color: #ecf0f1;
+    width: 100px;
+    /* Fixed size for background */
+    height: 100px;
+    /* Fixed size for background */
+    border-radius: 50%;
+    /* Make the background circular */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Optional shadow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    /* Ensure the background is centered */
+}
+
+.service-item img {
+    width: 80px;
+    /* Image size inside the background */
+    height: 80px;
+    /* Image size inside the background */
+    border-radius: 50%;
+    /* Make the image circular */
+    object-fit: cover;
+}
+
+.service-name {
+    font-size: 12px;
+    /* Service name font size */
+    margin-top: 10px;
+    /* Space between background and text */
+    color: #444040;
+    /* Text color */
+}
+
+/*product slider*/
+
+.product-container {
+    display: flex;
+    width: fit-content;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+}
+
+.product-box {
+    width: 150px;
+    /* Set a fixed width for product boxes */
+    flex-shrink: 0;
+    /* Prevents the box from shrinking */
+}
+
+.product-image {
+    height: 100px;
+    /* Adjust this as needed */
+    object-fit: contain;
+    /* Ensures the image fits inside the container without being cut */
+}
+
+.truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.horizontal-scroll {
+    width: 100%;
+    overflow-x: scroll;
+    scrollbar-color: transparent transparent;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Discount Section */
+.discount {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.discount-banner {
+    flex: 1;
+}
+
+.discount-banner img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.flash-deal {
+    display: flex;
+    background-color: #0079A1;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.flash-deal-banner {
+    flex: 0 0 25%;
+    padding: 20px;
+    text-align: center;
+}
+
+.flash-deal-banner h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.flash-deal-banner h3 {
+    font-size: 28px;
+    /* Sesuaikan ukuran font */
+    margin: 8px 0;
+    white-space: nowrap;
+    /* Memastikan teks tidak terputus */
+}
+
+.flash-deal-banner p {
+    font-size: 14px;
+    /* Sesuaikan ukuran font */
+    margin: 4px 0;
+    white-space: nowrap;
+    /* Memastikan teks tidak terputus */
+}
+
+.promo-button {
+    background-color: white;
+    color: #0079A1;
+    padding: 8px 16px;
+    /* Kurangi padding untuk memperkecil tombol */
+    border: none;
+    border-radius: 16px;
+    /* Sesuaikan radius agar tombol tetap proporsional */
+    font-size: 12px;
+    /* Sesuaikan ukuran font */
+    cursor: pointer;
+    margin-top: 8px;
+    white-space: nowrap;
+    /* Memastikan teks tetap dalam satu baris */
+}
+
+
+.terms {
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.flash-deal-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 20px;
+    flex: 0 0 75%;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.flash-deal-container::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, and Opera */
+}
+
+.flash-deal-item {
+    flex: 0 0 auto;
+    background-color: #f8f8f8;
+    color: #333;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+}
+
+.flash-deal-item img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.flash-deal-item .discount-price {
+    font-size: 18px;
+    color: #0079A1;
+    margin: 5px 0;
+}
+
+.flash-deal-item .original-price {
+    font-size: 14px;
+    color: #888;
+    text-decoration: line-through;
+}
+
+.deal-details {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.jasa-produk-sekitar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.jasa-produk-sekitar .service-item {
+    width: 48%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.jasa-produk-sekitar .service-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.title-section {
+    text-align: left;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.title-section h3 {
+    font-size: 18px;
+    margin: 5px 0;
+    color: #333;
+}
+
+.title-section p {
+    font-size: 15px;
+    color: #777;
+    margin: 0;
+}
+
+/* Card Container */
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    /* Add margin-bottom to ensure spacing from the footer */
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.card .image {
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card .title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.card .price {
+    font-size: 14px;
+    color: #00aaff;
+    margin-top: 5px;
+    text-align: left;
+}
+
+.card .rating {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.card .rating .star {
+    color: #ffc107;
+    font-size: 12px;
+}
+
+.card .rating .reviews {
+    margin-left: 5px;
+    font-size: 10px;
+    color: #666;
+}
+
+.footer {
+    font-family: "Inter", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 15px;
+    border-top: 1px solid #e0e0e0;
+    background-color: #fff;
+    width: 100%;
+    max-width: 480px;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    height: 60px;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #000;
+}
+
+.footer div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.footer div i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.img-profil {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+img.img-profil {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    top: -10px;
+    border-radius: 50%;
+    border: 1.9px solid #10ABCF;
+}
+
+.footer img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.footer img.img-profil {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    top: -20px;
+    border-radius: 50%;
+    margin-bottom: -20px;
+    border: 1.9px solid #10ABCF;
+}

@@ -1,0 +1,98 @@
+body {
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Align items at the top */
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+}
+
+
+.mobile-container {
+    width: 100%;
+    max-width: 480px;
+    min-height: 140vh;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.footer {
+    font-family: "Inter", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 15px;
+    border-top: 1px solid #e0e0e0;
+    background-color: #fff;
+    width: 100%;
+    max-width: 480px;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    height: 60px;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #000;
+}
+
+.footer div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.footer div i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.img-profil {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+img.img-profil {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    top: -10px;
+    border-radius: 50%;
+    border: 1.9px solid #10ABCF;
+}
+
+.footer img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.footer img.img-profil {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    top: -20px;
+    border-radius: 50%;
+    margin-bottom: -15px;
+    border: 1.9px solid #10ABCF;
+}
