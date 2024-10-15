@@ -1,66 +1,6 @@
-{{-- <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@include('admin_page.layout.master')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-                <div class="p-6 text-gray-900">
-                    <h2 class="font-semibold text-lg text-gray-800 leading-tight">
-                        {{ __('Menu') }}
-                    </h2>
-                    <ul>
-                        <li>
-                            <a href="{{ route('permissions.index') }}"
-                                class="text-blue-500 hover:text-blue-700 font-bold">
-                                {{ __('Permissions') }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('roles.index') }}" class="text-blue-500 hover:text-blue-700 font-bold">
-                                {{ __('Roles') }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('users.index') }}" class="text-blue-500 hover:text-blue-700 font-bold">
-                                {{ __('Users') }}
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout> --}}
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Dashboard</title>
-    <!-- Custom fonts for this template-->
-    <link href="{{ asset('sb-admin2') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('sb-admin2') }}/css/sb-admin-2.min.css" rel="stylesheet">
-
-</head>
+@stack('styles')
 
 <body id="page-top">
 
@@ -82,7 +22,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/dashboard-09">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -140,7 +80,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
@@ -155,7 +95,7 @@
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
                         <a class="collapse-item" href="{{ route('exciting-missions.index') }}">Misi Seru</a>
-                        <a class="collapse-item" href="{{ asset('sb-admin2') }}/404.html">404 Page</a>
+                        <a class="collapse-item" href="404.html">404 Page</a>
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
@@ -201,7 +141,7 @@
                     </button>
 
                     <!-- Tambahkan kode berikut di sebelah kiri search -->
-                    <h1 class="h3 mb-0 text-gray-800 mr-3 d-none d-sm-inline-block">Dashboard</h1>
+                    <h1 class="h3 mb-0 text-gray-800 mr-3 d-none d-sm-inline-block">@yield('title')</h1>
                     <!-- Topbar Search -->
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -280,6 +220,9 @@
                 </nav>
                 <!-- End of Topbar -->
 
+
+                @yield('konten')
+
                 <!-- Scroll to Top Button-->
                 <a class="scroll-to-top rounded" href="#page-top">
                     <i class="fas fa-angle-up"></i>
@@ -317,12 +260,15 @@
                 <script src="{{ asset('sb-admin2') }}/js/sb-admin-2.min.js"></script>
 
                 <!-- Page level plugins -->
-                <script src="{{ asset('sb-admin2') }}/vendor/chart.js/Chart.min.js"></script>
+                <script src="{{ asset('sb-admin2') }}/vendor/datatables/jquery.dataTables.min.js"></script>
+                <script src="{{ asset('sb-admin2') }}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
                 <!-- Page level custom scripts -->
-                <script src="{{ asset('sb-admin2') }}/js/demo/chart-area-demo.js"></script>
-                <script src="{{ asset('sb-admin2') }}/js/demo/chart-pie-demo.js"></script>
+                <script src="{{ asset('sb-admin2') }}/js/demo/datatables-demo.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 
 </html>
+
+@stack('scripts')

@@ -111,16 +111,10 @@ class UserController extends Controller
         return redirect('/users')->with('status', 'User Updated Successfully with roles');
     }
 
-    public function destroy($userId)
+    public function destroy($id)
     {
-        User::destroy($userId);
-        return response()->json(['success' => 'User  deleted successfully']);
+        $user = User::findOrFail($id);
+        $user->delete();
+        return response()->json(['success' => 'User deleted successfully']);
     }
-
-    // public function destroy($userId)
-    // {
-    //     // Delete the user
-    //     User::destroy($userId);
-    //     return redirect()->route('users.index');
-    // }
 }

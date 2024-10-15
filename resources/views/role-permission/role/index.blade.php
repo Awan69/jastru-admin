@@ -169,6 +169,11 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Role has been deleted.",
+                        icon: "success"
+                    });
                     $.ajax({
                         type: 'DELETE',
                         url: "{{ url('roles/') }}" + "/" + id,
@@ -176,7 +181,19 @@
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function(data) {
-                            window.location.href = "{{ url('roles') }}";
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: data.status,
+                                icon: "success"
+                            });
+                            $('#role-table').DataTable().ajax.reload();
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                title: "Error!",
+                                text: "Something went wrong.",
+                                icon: "error"
+                            });
                         }
                     });
                 }

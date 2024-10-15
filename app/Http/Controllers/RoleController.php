@@ -86,9 +86,10 @@ class RoleController extends Controller
         return redirect('roles')->with('status', 'Role Updated Successfully');
     }
 
-    public function destroy($roleId)
+    public function destroy($id)
     {
-        Role::destroy($roleId);
+        $role = Role::findOrFail($id);
+        $role->delete();
         return response()->json(['success' => 'Role  deleted successfully']);
     }
 

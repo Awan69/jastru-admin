@@ -113,7 +113,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Name</th>
-                                <th>Email</th>
+                                <th>Address</th>
                                 <th>Role</th>
                                 <th>Action</th>
                             </tr>
@@ -171,6 +171,11 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "User has been deleted.",
+                            icon: "success"
+                        });
                         $.ajax({
                             type: 'DELETE',
                             url: "{{ url('users/') }}" + "/" + id,
@@ -178,7 +183,19 @@
                                 "_token": "{{ csrf_token() }}"
                             },
                             success: function(data) {
-                                window.location.href = "{{ url('users') }}";
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: data.status,
+                                    icon: "success"
+                                });
+                                $('#user-table').DataTable().ajax.reload();
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "Something went wrong.",
+                                    icon: "error"
+                                });
                             }
                         });
                     }

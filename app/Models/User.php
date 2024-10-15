@@ -47,4 +47,9 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    public function excitingMissions()
+    {
+        return $this->hasMany(ExcitingMission::class, 'create_by');
+    }
 }

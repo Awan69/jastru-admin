@@ -9,6 +9,8 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\ExcitingMissionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,6 +41,16 @@ Route::group(['middleware' => ['role:super-admin|admin', 'auth']], function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/{userId}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
     Route::delete('users/{userId}', [App\Http\Controllers\UserController::class, 'destroy']);
+
+    Route::resource('partners', App\Http\Controllers\PartnerController::class);
+    Route::get('/partners', [PartnerController::class, 'index'])->name('partners.index');
+    Route::get('partners/{partnerId}/delete', [App\Http\Controllers\PartnerController::class, 'destroy']);
+    Route::delete('partners/{partnerId}', [App\Http\Controllers\PartnerController::class, 'destroy']);
+
+    Route::resource('exciting-missions', App\Http\Controllers\ExcitingMissionController::class);
+    Route::get('/exciting-missions', [ExcitingMissionController::class, 'index'])->name('exciting-missions.index');
+    Route::get('exciting-missions/{xciting-missionId}/delete', [App\Http\Controllers\ExcitingMissionController::class, 'destroy']);
+    Route::delete('exciting-missions/{exciting-missionId}', [App\Http\Controllers\ExcitingMissionController::class, 'destroy']);
 });
 
 Route::group(['middleware' => ['role:staff|user', 'auth', 'verified']], function () {

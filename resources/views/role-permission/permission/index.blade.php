@@ -159,6 +159,11 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Permmison has been deleted.",
+                        icon: "success"
+                    });
                     $.ajax({
                         type: 'DELETE',
                         url: "{{ url('permissions/') }}" + "/" + id,
@@ -166,7 +171,19 @@
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function(data) {
-                            window.location.href = "{{ url('permissions') }}";
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: data.status,
+                                icon: "success"
+                            });
+                            $('#permission-table').DataTable().ajax.reload();
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                title: "Error!",
+                                text: "Something went wrong.",
+                                icon: "error"
+                            });
                         }
                     });
                 }
