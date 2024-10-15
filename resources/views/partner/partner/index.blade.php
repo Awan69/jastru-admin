@@ -74,7 +74,7 @@
                         name: 'partner_address'
                     },
                     {
-                        data: 'amount_mission',
+                        data: 'exciting_missions_count',
                         name: 'exciting_missions_count'
                     },
                     {

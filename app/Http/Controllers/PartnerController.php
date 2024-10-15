@@ -29,8 +29,7 @@ class PartnerController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $partners = Partner::withCount('excitingMissions');
-            $partners = Partner::all();
+            $partners = Partner::withCount('excitingMissions')->get();
             return DataTables::of($partners)
                 ->addColumn('action', function ($partner) {
                     $editUrl = route('partners.edit', $partner->id);
