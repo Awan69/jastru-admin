@@ -26,8 +26,14 @@ class ExcitingMission extends Model
     {
         return $this->belongsTo(User::class, 'create_by');
     }
+
     public function partner()
     {
         return $this->belongsTo(Partner::class, 'partner_id');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(ExcitingMissionTicket::class, 'exciting_mission_id');
     }
 }

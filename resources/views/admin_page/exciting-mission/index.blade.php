@@ -6,11 +6,6 @@
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
-
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Misi Seru</h1>
-        <p class="mb-4">Table ini berisi tentang data Misi Seru.</p>
-
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">

@@ -88,17 +88,17 @@
                             <label for="status">Status</label>
                             <select name="status" class="form-control" style="width: 100%" required>
                                 <option value="">Select Status</option>
-                                <option value="active" {{ $excitingMission->status == 'active' ? 'selected' : '' }}>Active
+                                <option value="Active" {{ $excitingMission->status == 'Active' ? 'selected' : '' }}>Active
                                 </option>
-                                <option value="hold" {{ $excitingMission->status == 'hold' ? 'selected' : '' }}>Hold
+                                <option value="Hold" {{ $excitingMission->status == 'Hold' ? 'selected' : '' }}>Hold
                                 </option>
-                                <option value="kadaluarsa"
-                                    {{ $excitingMission->status == 'kadaluarsa' ? 'selected' : '' }}>Kadaluarsa</option>
-                                <option value="progres" {{ $excitingMission->status == 'progres' ? 'selected' : '' }}>
+                                <option value="Kadaluarsa"
+                                    {{ $excitingMission->status == 'Kadaluarsa' ? 'selected' : '' }}>Kadaluarsa</option>
+                                <option value="Progres" {{ $excitingMission->status == 'Progres' ? 'selected' : '' }}>
                                     Progres</option>
-                                <option value="pendding" {{ $excitingMission->status == 'pendding' ? 'selected' : '' }}>
+                                <option value="Pendding" {{ $excitingMission->status == 'Pendding' ? 'selected' : '' }}>
                                     Pendding</option>
-                                <option value="berhasil" {{ $excitingMission->status == 'berhasil' ? 'selected' : '' }}>
+                                <option value="Berhasil" {{ $excitingMission->status == 'Berhasil' ? 'selected' : '' }}>
                                     Berhasil</option>
                                 <option value="parcial" {{ $excitingMission->status == 'parcial' ? 'selected' : '' }}>
                                     Parcial</option>

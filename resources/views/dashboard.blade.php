@@ -155,6 +155,7 @@
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
                         <a class="collapse-item" href="{{ route('exciting-missions.index') }}">Misi Seru</a>
+                        <a class="collapse-item" href="{{ route('balance.index') }}">Balance User</a>
                         <a class="collapse-item" href="{{ asset('sb-admin2') }}/404.html">404 Page</a>
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>

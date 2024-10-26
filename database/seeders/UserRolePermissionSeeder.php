@@ -89,5 +89,16 @@ class UserRolePermissionSeeder extends Seeder
         ]);
 
         $staffUser->assignRole($staffRole);
+
+        $User = User::firstOrCreate([
+            'email' => 'user@gmail.com',
+        ], [
+            'name' => 'User',
+            'email' => 'User@gmail.com',
+            'email_verified_at' => '2024-10-01 10:05:35',
+            'password' => Hash::make('12345678'),
+        ]);
+
+        $User->assignRole($staffRole);
     }
 }

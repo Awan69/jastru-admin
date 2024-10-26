@@ -52,4 +52,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(ExcitingMission::class, 'create_by');
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(ExcitingMissionTicket::class, 'user_id');
+    }
 }

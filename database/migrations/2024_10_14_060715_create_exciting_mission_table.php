@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('partner_id');
             $table->string('name_mission', 250);
             $table->string('amount_reward');
-            $table->string('remaining_ticket');
-            $table->string('amount_ticket');
+            $table->integer('remaining_ticket');
+            $table->integer('amount_ticket');
             $table->string('processing_time');
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('mission_requirements', 250)->nullable();
             $table->string('steps', 250)->nullable();
             $table->string('status', 250);

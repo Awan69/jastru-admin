@@ -11,6 +11,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ExcitingMissionController;
+use App\Http\Controllers\BalanceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,6 +52,13 @@ Route::group(['middleware' => ['role:super-admin|admin', 'auth']], function () {
     Route::get('/exciting-missions', [ExcitingMissionController::class, 'index'])->name('exciting-missions.index');
     Route::get('exciting-missions/{xciting-missionId}/delete', [App\Http\Controllers\ExcitingMissionController::class, 'destroy']);
     Route::delete('exciting-missions/{exciting-missionId}', [App\Http\Controllers\ExcitingMissionController::class, 'destroy']);
+
+    Route::get('exciting-mission-tickets', [ExcitingMissionController::class, 'tickets'])->name('exciting-mission-tickets.index');
+    Route::post('exciting-mission-tickets/update-status', [ExcitingMissionController::class, 'updateStatus'])->name('exciting-mission-tickets.update-status');
+
+    Route::resource('balance', App\Http\Controllers\BalanceController::class);
+    Route::get('/balance', [BalanceController::class, 'index'])->name('balance.index');
+    Route::get('balance/history/{user_id}', [BalanceController::class, 'history'])->name('balance.history');
 });
 
 Route::group(['middleware' => ['role:staff|user', 'auth', 'verified']], function () {

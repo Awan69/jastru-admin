@@ -59,13 +59,13 @@
                             <label for="status">Status</label>
                             <select name="status" class="form-control" style="width: 100%" required>
                                 <option value="">Select Status</option>
-                                <option value="active">Active</option>
-                                <option value="hold">Hold</option>
-                                <option value="kadaluarsa">Kadaluarsa</option>
-                                <option value="progres">Progres</option>
-                                <option value="pendding">Pendding</option>
-                                <option value="berhasil">Berhasil</option>
-                                <option value="parcial">Parcial</option>
+                                <option value="Active">Active</option>
+                                <option value="Hold">Hold</option>
+                                <option value="Kadaluarsa">Kadaluarsa</option>
+                                <option value="Progres">Progres</option>
+                                <option value="Pendding">Pendding</option>
+                                <option value="Berhasil">Berhasil</option>
+                                <option value="Parcial">Parcial</option>
                             </select>
                         </div>
                         <div class="mb-3">
