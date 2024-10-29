@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('create_by');
             $table->string('partner_id');
             $table->string('name_mission', 250);
-            $table->string('amount_reward');
+            $table->integer('amount_reward');
+            $table->integer('price');
             $table->integer('remaining_ticket');
             $table->integer('amount_ticket');
+            $table->integer('total_price');
             $table->string('processing_time');
             $table->date('start_date');
             $table->date('end_date');

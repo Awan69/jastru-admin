@@ -35,11 +35,22 @@
                         </div>
                         <div class="mb-3">
                             <label for="amount_reward">Fee</label>
-                            <input type="number" name="amount_reward" class="form-control" style="width: 100%" required />
+                            <input type="number" name="amount_reward" class="form-control" style="width: 100%" required
+                                oninput="calculateTotalPrice()" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="price">Price</label>
+                            <input type="number" name="price" class="form-control" style="width: 100%" required
+                                oninput="calculateTotalPrice()" />
                         </div>
                         <div class="mb-3">
                             <label for="amount_ticket">Amount Ticket</label>
-                            <input type="number" name="amount_ticket" class="form-control" style="width: 100%" required />
+                            <input type="number" name="amount_ticket" class="form-control" style="width: 100%" required
+                                oninput="calculateTotalPrice()" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="total_price">Total Price</label>
+                            <input type="text" id="total_price" class="form-control" style="width: 100%" readonly />
                         </div>
                         <div class="mb-3">
                             <label for="processing_time">Processing Time</label>
@@ -63,9 +74,9 @@
                                 <option value="Hold">Hold</option>
                                 <option value="Kadaluarsa">Kadaluarsa</option>
                                 <option value="Progres">Progres</option>
-                                <option value="Pendding">Pendding</option>
+                                <option value="Pending">Pending</option>
                                 <option value="Berhasil">Berhasil</option>
-                                <option value="Parcial">Parcial</option>
+                                <option value="Partial">Parcial</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -94,6 +105,16 @@
 
         <!-- CDN Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            function calculateTotalPrice() {
+                let amountReward = document.querySelector('input[name="amount_reward"]').value;
+                let amountTicket = document.querySelector('input[name="amount_ticket"]').value;
+                let totalPrice = amountReward * amountTicket;
+
+                document.querySelector('#total_price').value = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+            }
+        </script>
     </body>
 
 @endsection

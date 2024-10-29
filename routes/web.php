@@ -50,6 +50,8 @@ Route::group(['middleware' => ['role:super-admin|admin', 'auth']], function () {
 
     Route::resource('exciting-missions', App\Http\Controllers\ExcitingMissionController::class);
     Route::get('/exciting-missions', [ExcitingMissionController::class, 'index'])->name('exciting-missions.index');
+    Route::post('exciting-missions/update-status', [ExcitingMissionController::class, 'changeExcitingMissionStatus'])->name('exciting-missions.update-status');
+    Route::post('exciting-missions/add-tickets', [ExcitingMissionController::class, 'addTickets'])->name('exciting-missions.add-tickets');
     Route::get('exciting-missions/{xciting-missionId}/delete', [App\Http\Controllers\ExcitingMissionController::class, 'destroy']);
     Route::delete('exciting-missions/{exciting-missionId}', [App\Http\Controllers\ExcitingMissionController::class, 'destroy']);
 

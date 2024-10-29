@@ -23,11 +23,12 @@
                                 <th>ID</th>
                                 <th>Create By</th>
                                 <th>Partner</th>
-                                <th>Logo</th>
                                 <th>Nama Misi</th>
                                 <th>Fee</th>
+                                <th>Price</th>
                                 <th>Sisa Tiket</th>
                                 <th>Total Tiket</th>
+                                <th>Total Price</th>
                                 <th>Waktu Proses</th>
                                 <th>Langkah-Langkah</th>
                                 <th>Status</th>
@@ -69,20 +70,22 @@
                         name: 'partner.partner_name'
                     },
                     {
-                        data: 'partner.logo',
-                        name: 'partner.logo',
-                        render: function(data, type, row) {
-                            return '<img src="{{ asset('images/partners/') }}/' + data +
-                                '" width="100%" height="100%">';
-                        }
-                    },
-                    {
                         data: 'name_mission',
                         name: 'name_mission'
                     },
                     {
                         data: 'amount_reward',
-                        name: 'amount_reward'
+                        name: 'amount_reward',
+                        render: function(data) {
+                            return formatRupiah(data);
+                        }
+                    },
+                    {
+                        data: 'price',
+                        name: 'price',
+                        render: function(data) {
+                            return formatRupiah(data);
+                        }
                     },
                     {
                         data: 'remaining_ticket',
@@ -91,6 +94,13 @@
                     {
                         data: 'amount_ticket',
                         name: 'amount_ticket'
+                    },
+                    {
+                        data: 'total_price',
+                        name: 'total_price',
+                        render: function(data) {
+                            return formatRupiah(data);
+                        }
                     },
                     {
                         data: 'processing_time',
@@ -121,6 +131,10 @@
                 ]
             });
         });
+
+        function formatRupiah(value) {
+            return 'Rp ' + parseFloat(value).toLocaleString('id-ID');
+        }
     </script>
 
     <script>
@@ -156,6 +170,104 @@
                                 icon: "error"
                             });
                         }
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function changeExcitingMissionStatus(id, status) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You want to change the status to ' + status + '?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, change it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ url('exciting-missions/update-status') }}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "id": id,
+                            "status": status
+                        },
+                        success: function(data) {
+                            Swal.fire({
+                                title: "Updated!",
+                                text: 'Status changed to ' + status,
+                                icon: "success"
+                            });
+                            $('#exciting-mission-table').DataTable().ajax.reload();
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                title: "Error!",
+                                text: "Something went wrong.",
+                                icon: "error"
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function showAddTicketModal(excitingMissionId) {
+            Swal.fire({
+                title: 'Tambah Tiket',
+                html: `
+                <div>
+                    <label for="ticket_amount">Jumlah Tiket:</label>
+                    <input type="number" id="ticket_amount" class="swal2-input" placeholder="Jumlah Tiket" required>
+                </div>
+            `,
+                focusConfirm: false,
+                preConfirm: () => {
+                    const ticketAmount = document.getElementById('ticket_amount').value;
+                    return {
+                        ticketAmount,
+                        excitingMissionId
+                    };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const {
+                        ticketAmount,
+                        excitingMissionId
+                    } = result.value;
+                    addTickets(excitingMissionId, ticketAmount);
+                }
+            });
+        }
+
+        function addTickets(excitingMissionId, ticketAmount) {
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('exciting-missions/add-tickets') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "exciting_mission_id": excitingMissionId,
+                    "ticket_amount": ticketAmount
+                },
+                success: function(data) {
+                    Swal.fire({
+                        title: "Success!",
+                        text: data.status,
+                        icon: "success"
+                    });
+                    $('#exciting-mission-table').DataTable().ajax.reload();
+                },
+                error: function(xhr) {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Something went wrong.",
+                        icon: "error"
                     });
                 }
             });

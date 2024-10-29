@@ -7,6 +7,8 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
+        <a href="{{ route('balance.index') }}" class="btn btn-primary mb-3">Back to User Balance</a>
+
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">User Transaction History</h1>
         <!-- DataTales Example -->

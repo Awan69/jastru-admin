@@ -42,17 +42,55 @@ class ExcitingMissionController extends Controller
                     $deleteUrl = route('exciting-missions.destroy', $excitingMission->id);
                     $ticketsUrl = route('exciting-mission-tickets.index', ['exciting_mission_id' => $excitingMission->id]);
 
-                    return '<div class="btn-group" role="group">
-                    <a href="' . $ticketsUrl . '" class="btn btn-sm btn-info">Detail</a>
-                    <a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>
-                    <button type="button" id="deleteExcitingMission' . $excitingMission->id . '" class="btn btn-sm btn-danger" onclick="deleteExcitingMission(' . $excitingMission->id . ')">Hapus</button>
-                </div>';
+                    $actionButtons = '<div class="btn-group" role="group">
+                        <a href="' . $ticketsUrl . '" class="btn btn-sm btn-info">Detail</a>
+                        <a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>
+                        <button type="button" id="deleteExcitingMission' . $excitingMission->id . '" class="btn btn-sm btn-danger" onclick="deleteExcitingMission(' . $excitingMission->id . ')">Hapus</button>
+                        <button type="button" class="btn btn-sm btn-success" onclick="showAddTicketModal(' . $excitingMission->id . ')">Tambah Tiket</button>'; // Tambahkan tombol ini
+
+                    if (in_array($excitingMission->status, ['Active', 'Pending', 'Partial'])) {
+                        $actionButtons .= '<button class="btn btn-warning btn-sm" onclick="changeExcitingMissionStatus(' . $excitingMission->id . ', \'Hold\')">Hold</button>';
+                    }
+                    if (in_array($excitingMission->status, ['Pending', 'Hold']) && $excitingMission->remaining_ticket == $excitingMission->amount_ticket) {
+                        $actionButtons .= '<button class="btn btn-success btn-sm" onclick="changeExcitingMissionStatus(' . $excitingMission->id . ', \'Active\')">Active</button>';
+                    }
+                    if ($excitingMission->remaining_ticket < $excitingMission->amount_ticket && in_array($excitingMission->status, ['Hold'])) {
+                        $actionButtons .= '<button class="btn btn-info btn-sm" onclick="changeExcitingMissionStatus(' . $excitingMission->id . ', \'Partial\')">Partial</button>';
+                    }
+
+                    $actionButtons .= '</div>';
+                    return $actionButtons;
                 })
                 ->rawColumns(['action'])
                 ->toJson();
         }
 
         return view('admin_page.exciting-mission.index');
+    }
+    public function changeExcitingMissionStatus(Request $request)
+    {
+        $excitingMission = ExcitingMission::find($request->id);
+        $excitingMission->status = $request->status;
+        $excitingMission->save();
+
+        return response()->json(['status' => 'Status updated successfully'], 200);
+    }
+
+    public function addTickets(Request $request)
+    {
+        $request->validate([
+            'exciting_mission_id' => 'required|exists:exciting_mission,id',
+            'ticket_amount' => 'required|integer|min:1',
+        ]);
+
+        $excitingMission = ExcitingMission::find($request->exciting_mission_id);
+        $excitingMission->amount_ticket += $request->ticket_amount;
+        $excitingMission->remaining_ticket += $request->ticket_amount;
+        $excitingMission->total_price = $excitingMission->amount_reward * $excitingMission->amount_ticket;
+
+        $excitingMission->save();
+
+        return response()->json(['status' => 'Tickets added successfully!']);
     }
 
     public function tickets(Request $request)
@@ -71,18 +109,16 @@ class ExcitingMissionController extends Controller
                     return $ticket->excitingMission ? $ticket->excitingMission->name_mission : 'N/A';
                 })
                 ->addColumn('action', function ($ticket) {
-                    if ($ticket->status === null) {
+                    if ($ticket->status === null || $ticket->status === 'pending') {
                         return '
                         <button class="btn btn-success btn-sm text-white" onclick="approveTicket(' . $ticket->id . ')"><i class="bi bi-check-lg"></i></button>
                         <button class="btn btn-danger btn-sm text-white" onclick="rejectTicket(' . $ticket->id . ')"><i class="bi bi-x-lg"></i></button>
-                    ';
+                        ';
                     }
                     return '';
                 })
                 ->make(true);
         }
-
-        // Pass the excitingMissionId to the view
         return view('admin_page.exciting-mission.tickets', compact('excitingMissionId'));
     }
 
@@ -100,25 +136,19 @@ class ExcitingMissionController extends Controller
             $user = $ticket->user;
             $excitingMission = $ticket->excitingMission;
 
-            // Assuming 'amount_reward' is the fee to be added to the user's balance
             $amountReward = $excitingMission->amount_reward;
 
-            // Get the user's current balance before adding the reward
             $balance = Balance::firstOrCreate(
                 ['user_id' => $user->id],
-                ['balance_amount' => 0] // Initialize balance to 0 if not exists
+                ['balance_amount' => 0]
             );
 
-            // Store the current balance before the reward
             $currentBalance = $balance->balance_amount;
 
-            // Increment the user's balance with the reward
             $balance->increment('balance_amount', $amountReward);
 
-            // Calculate the new total balance after adding the reward
             $newBalance = $currentBalance + $amountReward;
 
-            // Create an exciting mission transaction record
             $excitingMissionTransaction = new ExcitingMisionTransaction();
             $excitingMissionTransaction->balace_id = $balance->id;
             $excitingMissionTransaction->exciting_mission_tickets_id = $ticket->id;
@@ -126,23 +156,23 @@ class ExcitingMissionController extends Controller
             $excitingMissionTransaction->balace_in = $amountReward;
             $excitingMissionTransaction->balace_out = 0;
             $excitingMissionTransaction->user_id = $user->id;
+            $excitingMissionTransaction->created_at = now();
             $excitingMissionTransaction->save();
 
-            // Format the balances in Rupiah
             $formattedCurrentBalance = 'Rp. ' . number_format($currentBalance, 0, ',', '.');
             $formattedAmountReward = 'Rp. ' . number_format($amountReward, 0, ',', '.');
             $formattedNewBalance = 'Rp. ' . number_format($newBalance, 0, ',', '.');
 
-            // Create a transaction detail record
             $transactionDetail = new TransactionDetail();
             $transactionDetail->user_id = $user->id;
             $transactionDetail->balace_id = $balance->id;
             $transactionDetail->mision_transaction_id = $excitingMissionTransaction->id;
             $transactionDetail->product_transaction_id = null;
             $transactionDetail->service_transaction_id = null;
-            $transactionDetail->detail = 'Reward for ticket approval';
+            $transactionDetail->detail = 'Reward for ticket approval for Mission ID: ' . $excitingMission->id . ', Name: ' . $excitingMission->name_mission;
             $transactionDetail->dec_transaction = 'Current Balance: ' . $formattedCurrentBalance . ', Fee Awarded: ' . $formattedAmountReward . ', New Balance: ' . $formattedNewBalance; // Set the dec_transaction
             $transactionDetail->category = 'Exciting Mission';
+            $transactionDetail->created_at = now();
             $transactionDetail->save();
         }
 
@@ -173,8 +203,9 @@ class ExcitingMissionController extends Controller
         $request->validate([
             'partner_id' => 'required|exists:partners,id',
             'name_mission' => 'required|string|max:250',
-            'amount_reward' => 'required|string',
-            'amount_ticket' => 'required|string',
+            'amount_reward' => 'required|numeric',
+            'price' => 'required|numeric',
+            'amount_ticket' => 'required|numeric',
             'processing_time' => 'required|string',
             'start_date' => 'required|string',
             'end_date' => 'required|string',
@@ -186,8 +217,10 @@ class ExcitingMissionController extends Controller
         $excitingMission->partner_id = $request->input('partner_id');
         $excitingMission->name_mission = ucwords(strtolower($request->input('name_mission')));
         $excitingMission->amount_reward = $request->input('amount_reward');
+        $excitingMission->price = $request->input('price');
         $excitingMission->amount_ticket = $request->input('amount_ticket');
         $excitingMission->remaining_ticket = $request->input('amount_ticket');
+        $excitingMission->total_price = $request->input('amount_reward') * $request->input('amount_ticket');
         $excitingMission->processing_time = ucwords(strtolower($request->input('processing_time')));
         $excitingMission->start_date = $request->input('start_date');
         $excitingMission->end_date = $request->input('end_date');
@@ -225,8 +258,8 @@ class ExcitingMissionController extends Controller
         $request->validate([
             'partner_id' => 'required|exists:partners,id',
             'name_mission' => 'required|string|max:250',
-            'amount_reward' => 'required|string',
-            'amount_ticket' => 'required|string',
+            'amount_reward' => 'required|numeric',
+            // 'price' => 'required|numeric',
             'processing_time' => 'required|string',
             'start_date' => 'required|string',
             'end_date' => 'required|string',
@@ -239,14 +272,14 @@ class ExcitingMissionController extends Controller
         $excitingMission->partner_id = $request->input('partner_id');
         $excitingMission->name_mission = ucwords(strtolower($request->input('name_mission')));
         $excitingMission->amount_reward = $request->input('amount_reward');
-        $excitingMission->amount_ticket = $request->input('amount_ticket');
-        $excitingMission->remaining_ticket = $request->input('amount_ticket');
+        // $excitingMission->price = $request->input('price');
         $excitingMission->processing_time = ucwords(strtolower($request->input('processing_time')));
         $excitingMission->start_date = $request->input('start_date');
         $excitingMission->end_date = $request->input('end_date');
         $excitingMission->mission_requirements = $request->input('mission_requirements');
         $excitingMission->steps = $request->input('steps');
         $excitingMission->status = $request->input('status');
+        $excitingMission->total_price = $excitingMission->amount_reward * $excitingMission->amount_ticket;
         $excitingMission->save();
 
         return redirect('/exciting-missions')->with('status', 'Exciting Mission updated successfully');

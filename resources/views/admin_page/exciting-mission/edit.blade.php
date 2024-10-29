@@ -47,20 +47,30 @@
                         </div>
                         <div class="mb-3">
                             <label for="amount_reward">Fee</label>
-                            <input type="number" name="amount_reward" value="{{ $excitingMission->amount_reward }}"
-                                class="form-control" style="width: 100%" required />
+                            <input type="number" name="amount_reward" id="amount_reward"
+                                value="{{ $excitingMission->amount_reward }}" class="form-control" style="width: 100%"
+                                required />
                             @error('amount_reward')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="mb-3">
-                            <label for="amount_ticket">Amount Ticket</label>
-                            <input type="number" name="amount_ticket" value="{{ $excitingMission->amount_ticket }}"
-                                class="form-control" style="width: 100%" required />
-                            @error('amount_ticket')
+
+                        {{-- <div class="mb-3">
+                            <label for="price">Price</label>
+                            <input type="number" name="price" value="{{ $excitingMission->price }}" class="form-control"
+                                style="width: 100%" required />
+                            @error('price')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
+                        </div> --}}
+
+                        <div class="mb-3">
+                            <label for="total_price">Total Price</label>
+                            <input type="text" name="total_price" id="total_price"
+                                value="{{ number_format($excitingMission->total_price, 0, ',', '.') }}"
+                                class="form-control" style="width: 100%" readonly />
                         </div>
+
                         <div class="mb-3">
                             <label for="processing_time">Processing Time</label>
                             <input type="text" name="processing_time" class="form-control" style="width: 100%" required
@@ -88,20 +98,22 @@
                             <label for="status">Status</label>
                             <select name="status" class="form-control" style="width: 100%" required>
                                 <option value="">Select Status</option>
-                                <option value="Active" {{ $excitingMission->status == 'Active' ? 'selected' : '' }}>Active
-                                </option>
-                                <option value="Hold" {{ $excitingMission->status == 'Hold' ? 'selected' : '' }}>Hold
-                                </option>
-                                <option value="Kadaluarsa"
-                                    {{ $excitingMission->status == 'Kadaluarsa' ? 'selected' : '' }}>Kadaluarsa</option>
-                                <option value="Progres" {{ $excitingMission->status == 'Progres' ? 'selected' : '' }}>
-                                    Progres</option>
-                                <option value="Pendding" {{ $excitingMission->status == 'Pendding' ? 'selected' : '' }}>
-                                    Pendding</option>
-                                <option value="Berhasil" {{ $excitingMission->status == 'Berhasil' ? 'selected' : '' }}>
-                                    Berhasil</option>
-                                <option value="parcial" {{ $excitingMission->status == 'parcial' ? 'selected' : '' }}>
-                                    Parcial</option>
+                                < option value="Active" {{ $excitingMission->status == 'Active' ? 'selected' : '' }}>Active
+                                    </option>
+                                    <option value="Hold" {{ $excitingMission->status == 'Hold' ? 'selected' : '' }}>Hold
+                                    </option>
+                                    <option value="Kadaluarsa"
+                                        {{ $excitingMission->status == 'Kadaluarsa' ? 'selected' : '' }}>
+                                        Kadaluarsa</option>
+                                    <option value="Progres" {{ $excitingMission->status == 'Progres' ? 'selected' : '' }}>
+                                        Progres</option>
+                                    <option value="Pending" {{ $excitingMission->status == 'Pending' ? 'selected' : '' }}>
+                                        Pending</option>
+                                    <option value="Berhasil"
+                                        {{ $excitingMission->status == 'Berhasil' ? 'selected' : '' }}>
+                                        Berhasil</option>
+                                    <option value="Partial" {{ $excitingMission->status == 'Partial' ? 'selected' : '' }}>
+                                        Partial</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -138,5 +150,28 @@
 
         <!-- CDN Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            const amountTicket = {{ $excitingMission->amount_ticket }};
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const amountRewardInput = document.getElementById('amount_reward');
+                const totalPriceInput = document.getElementById('total_price');
+
+                function formatRupiah(angka) {
+                    return `Rp ${angka.toLocaleString('id-ID')}`;
+                }
+
+                function updateTotalPrice() {
+                    const amountReward = parseFloat(amountRewardInput.value) || 0;
+                    const totalPrice = amountReward * amountTicket;
+                    totalPriceInput.value = formatRupiah(totalPrice);
+                }
+
+                amountRewardInput.addEventListener('input', updateTotalPrice);
+
+                updateTotalPrice();
+            });
+        </script>
     </body>
 @endsection

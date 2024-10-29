@@ -62,7 +62,7 @@
                         name: 'logo',
                         render: function(data, type, row) {
                             return '<img src="{{ asset('images/partners/') }}/' + data +
-                                '" width="100%" height="100%">';
+                                '" width="50px" height="50px">';
                         }
                     },
                     {
