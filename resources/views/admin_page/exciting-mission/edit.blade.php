@@ -64,12 +64,12 @@
                             @enderror
                         </div> --}}
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="total_price">Total Price</label>
                             <input type="text" name="total_price" id="total_price"
                                 value="{{ number_format($excitingMission->total_price, 0, ',', '.') }}"
                                 class="form-control" style="width: 100%" readonly />
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <label for="processing_time">Processing Time</label>
@@ -151,27 +151,5 @@
         <!-- CDN Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script>
-            const amountTicket = {{ $excitingMission->amount_ticket }};
-
-            document.addEventListener('DOMContentLoaded', function() {
-                const amountRewardInput = document.getElementById('amount_reward');
-                const totalPriceInput = document.getElementById('total_price');
-
-                function formatRupiah(angka) {
-                    return `Rp ${angka.toLocaleString('id-ID')}`;
-                }
-
-                function updateTotalPrice() {
-                    const amountReward = parseFloat(amountRewardInput.value) || 0;
-                    const totalPrice = amountReward * amountTicket;
-                    totalPriceInput.value = formatRupiah(totalPrice);
-                }
-
-                amountRewardInput.addEventListener('input', updateTotalPrice);
-
-                updateTotalPrice();
-            });
-        </script>
     </body>
 @endsection

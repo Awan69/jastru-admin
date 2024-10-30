@@ -108,9 +108,9 @@
 
         <script>
             function calculateTotalPrice() {
-                let amountReward = document.querySelector('input[name="amount_reward"]').value;
+                let price = document.querySelector('input[name="price"]').value;
                 let amountTicket = document.querySelector('input[name="amount_ticket"]').value;
-                let totalPrice = amountReward * amountTicket;
+                let totalPrice = price * amountTicket;
 
                 document.querySelector('#total_price').value = `Rp ${totalPrice.toLocaleString('id-ID')}`;
             }

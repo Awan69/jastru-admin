@@ -222,11 +222,11 @@
             Swal.fire({
                 title: 'Tambah Tiket',
                 html: `
-                <div>
-                    <label for="ticket_amount">Jumlah Tiket:</label>
-                    <input type="number" id="ticket_amount" class="swal2-input" placeholder="Jumlah Tiket" required>
-                </div>
-            `,
+        <div>
+            <label for="ticket_amount">Jumlah Tiket:</label>
+            <input type="number" id="ticket_amount" class="swal2-input" placeholder="Jumlah Tiket" required>
+        </div>
+        `,
                 focusConfirm: false,
                 preConfirm: () => {
                     const ticketAmount = document.getElementById('ticket_amount').value;

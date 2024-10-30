@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Termwind\Components\Dd;
 
 class ExcitingMissionController extends Controller
@@ -83,12 +84,17 @@ class ExcitingMissionController extends Controller
             'ticket_amount' => 'required|integer|min:1',
         ]);
 
-        $excitingMission = ExcitingMission::find($request->exciting_mission_id);
-        $excitingMission->amount_ticket += $request->ticket_amount;
-        $excitingMission->remaining_ticket += $request->ticket_amount;
-        $excitingMission->total_price = $excitingMission->amount_reward * $excitingMission->amount_ticket;
+        $excitingMissionId = $request->exciting_mission_id;
+        $ticketAmount = $request->ticket_amount;
 
-        $excitingMission->save();
+        $excitingMission = ExcitingMission::find($excitingMissionId);
+
+        $excitingMission->increment('amount_ticket', $ticketAmount);
+        $excitingMission->increment('remaining_ticket', $ticketAmount);
+
+        $amountToAddToTotalPrice = $excitingMission->price * $ticketAmount;
+
+        $excitingMission->increment('total_price', $amountToAddToTotalPrice);
 
         return response()->json(['status' => 'Tickets added successfully!']);
     }
@@ -220,7 +226,7 @@ class ExcitingMissionController extends Controller
         $excitingMission->price = $request->input('price');
         $excitingMission->amount_ticket = $request->input('amount_ticket');
         $excitingMission->remaining_ticket = $request->input('amount_ticket');
-        $excitingMission->total_price = $request->input('amount_reward') * $request->input('amount_ticket');
+        $excitingMission->total_price = $request->input('price') * $request->input('amount_ticket');
         $excitingMission->processing_time = ucwords(strtolower($request->input('processing_time')));
         $excitingMission->start_date = $request->input('start_date');
         $excitingMission->end_date = $request->input('end_date');
@@ -279,7 +285,7 @@ class ExcitingMissionController extends Controller
         $excitingMission->mission_requirements = $request->input('mission_requirements');
         $excitingMission->steps = $request->input('steps');
         $excitingMission->status = $request->input('status');
-        $excitingMission->total_price = $excitingMission->amount_reward * $excitingMission->amount_ticket;
+        $excitingMission->total_price = $excitingMission->price * $excitingMission->amount_ticket;
         $excitingMission->save();
 
         return redirect('/exciting-missions')->with('status', 'Exciting Mission updated successfully');
