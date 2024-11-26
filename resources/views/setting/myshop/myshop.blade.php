@@ -16,7 +16,11 @@
             <div class="info-myshop">
                 <img src="{{ asset('asset/images/setting/toko_saya/avatar.svg') }}" alt="Avatar" class="avatar-myshop">
                 <div class="info-text-myshop">
-                    <p class="name-myshop">Jeni lutfi fauzi</p>
+                    <div class="name-seller-myshop">
+                        <img src="{{ asset('asset/images/setting/toko_saya/level.svg') }}" alt="Seller Level"
+                            class="seller-level-icon-myshop">
+                        <p class="name-myshop">Jeni lutfi fauzi</p>
+                    </div>
                     <div class="saldo-myshop">
                         <img src="{{ asset('asset/images/setting/toko_saya/wallet.svg') }}" alt="Wallet"
                             class="wallet-icon">
@@ -26,9 +30,11 @@
                 <button class="button-myshop primary" type="button" style="margin-left: auto;">Kunjungi profil</button>
             </div>
             <div class="daftar-produk-myshop">
-                <p class="produk-count-myshop">Produk & Jasa</p>
-                <h3>Daftar produk & jasa saya</h3>
-                <p class="produk-count-myshop">4 Jasa & 3 Produk</p>
+                <div class="produk-jasa-text">
+                    <p class="produk-count-myshop">Produk & Jasa</p>
+                    <h3 class="produk-jasa-title">Daftar produk & jasa saya</h3>
+                    <p class="produk-count-myshop">4 Jasa & 3 Produk</p>
+                </div>
                 <a href="/products_services">
                     <img src="{{ asset('asset/images/icon/arrow.png') }}" alt="arrow"
                         class="bi bi-caret-right arrow-right">

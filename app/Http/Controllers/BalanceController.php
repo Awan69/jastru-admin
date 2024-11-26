@@ -28,10 +28,10 @@ class BalanceController extends Controller
             $balances = Balance::with('user')->get();
             return DataTables::of($balances)
                 ->addColumn('user_id', function ($balance) {
-                    return $balance->user ? $balance->user->id : 'N/A'; // Handle if user is null
+                    return $balance->user ? $balance->user->id : 'N/A';
                 })
                 ->addColumn('user_name', function ($balance) {
-                    return $balance->user ? $balance->user->name : 'N/A'; // Handle if user is null
+                    return $balance->user ? $balance->user->name : 'N/A';
                 })
                 ->addColumn('balance_amount', function ($balance) {
                     return 'Rp ' . number_format($balance->balance_amount, 0, ',', '.');
@@ -67,7 +67,7 @@ class BalanceController extends Controller
                     return $transactionDetail->dec_transaction;
                 })
                 ->addColumn('created_at', function ($transactionDetail) {
-                    return $transactionDetail->created_at->format('Y-m-d H:i:s'); // Format the date as needed
+                    return $transactionDetail->created_at->format('Y-m-d H:i:s');
                 })
                 ->make(true);
         }

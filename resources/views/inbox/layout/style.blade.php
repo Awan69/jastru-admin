@@ -1,7 +1,7 @@
 @push('style')
     <style>
         body {
-            font-family: "Inter", system-ui;
+            font-family: "Inter", sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -9,16 +9,15 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            /* Align items at the top */
             min-height: 100vh;
             overflow-x: hidden;
-            /* Prevent horizontal scroll */
         }
 
         .mobile-container {
             width: 100%;
             max-width: 480px;
-            height: 100vh;
+            min-height: 140vh;
+            height: 100%;
             background-color: #fff;
             display: flex;
             flex-direction: column;
@@ -32,37 +31,47 @@
             padding: 10px 15px;
             background-color: #fff;
             border-bottom: 1px solid #ddd;
+            position: fixed;
+            max-width: 480px;
+            width: 100%;
+            z-index: 10;
         }
 
         .header-with-icons .back-button {
             font-size: 24px;
             color: #10ABCF;
-            /* Set warna panah kembali */
             cursor: pointer;
             margin-right: auto;
-            /* Pindahkan panah kembali ke kiri */
+        }
+
+        .header-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin: 5px 0px 0px 10px;
         }
 
         .header-with-icons .right-icon {
             font-size: 28px;
-            /* Menyesuaikan ukuran ikon secara keseluruhan */
             cursor: pointer;
+            margin-left: auto;
         }
 
         .header-with-icons .right-icon img {
             width: 28px;
-            /* Menentukan lebar gambar */
             height: 28px;
-            /* Menentukan tinggi gambar */
-            /* Mengatur gambar agar proporsional dan sesuai ukuran yang diinginkan */
         }
-
 
         .top-bar {
             padding: 20px;
             background-color: #fff;
             border-bottom: 12px solid #f5f5f5;
             padding-bottom: 15px;
+            position: fixed;
+            max-width: 480px;
+            width: 100%;
+            top: 50px;
+            width: 100%;
+            z-index: 9;
         }
 
         .search-filter-container {
@@ -70,14 +79,15 @@
             font-weight: 300;
             display: flex;
             flex-direction: column;
-            padding-bottom: 10px;
+            padding-bottom: 20px;
+            padding-top: 10px;
+            margin-top: 70px;
         }
 
         .search-bar-container {
             display: flex;
             align-items: center;
             gap: 10px;
-            /* Add space between search bar and icon */
             margin-bottom: 10px;
         }
 
@@ -86,19 +96,14 @@
             align-items: center;
             justify-content: center;
             width: 40px;
-            /* Adjust width according to your needs */
             height: 40px;
-            /* Adjust height according to your needs */
-            border: 1px solid #ddd;
+            border: none;
             border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            /* Optional shadow for better visibility */
+            background-color: #F6F6F6;
         }
 
         .icon-with-border i {
             font-size: 20px;
-            /* Adjust size according to your needs */
         }
 
         .search-bar {
@@ -106,14 +111,12 @@
             align-items: center;
             border: 1px solid #ddd;
             border-radius: 10px;
-            padding: 10px;
+            padding: 0px 10px 0px 10px;
             flex-grow: 1;
-            /* Make search bar take available space */
         }
 
         .search-bar i {
             margin-right: 10px;
-            /* Add space between search icon and input */
         }
 
         .search-bar input {
@@ -121,27 +124,28 @@
             border: none;
             outline: none;
             font-size: 14px;
-            color: #333;
         }
-
 
         .filter-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
 
         .filter-container button {
             flex-grow: 1;
-            border: 1px solid #ddd;
+            border: none;
             border-radius: 20px;
-            background-color: #ffffff;
+            background-color: #F5F5F5;
             padding: 5px 15px;
             margin-right: 10px;
             cursor: pointer;
-            color: #333;
+            font-weight: 300;
         }
-
 
         .filter-container button:last-child {
             margin-right: 0;
@@ -157,27 +161,25 @@
             padding: 20px;
             flex-grow: 1;
             padding-bottom: 60px;
-            /* Adjust this value to match the height of the footer */
             position: relative;
             overflow: auto;
-            /* Pastikan konten masih dapat digulir */
+            margin-top: 70px;
         }
 
-        /* Menyembunyikan scrollbar tetapi tetap memungkinkan pengguliran */
         .hide-scrollbar::-webkit-scrollbar {
             width: 0;
-            /* Hides the scrollbar */
             height: 0;
-            /* Hides the scrollbar */
         }
 
         .hide-scrollbar {
             overflow: auto;
-            /* Memastikan konten masih dapat digulir */
             scrollbar-width: none;
-            /* Hides the scrollbar in Firefox */
             -ms-overflow-style: none;
-            /* Hides the scrollbar in Edge and IE */
+        }
+
+        .your-chat {
+            margin: 0px 0px 10px 0px;
+            font-weight: 500;
         }
 
         .chat-item {
@@ -185,11 +187,14 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 0;
-            border-bottom: 1px solid #ddd;
             text-decoration: none;
-            /* Remove underline on links */
             color: inherit;
-            /* Keep the default text color */
+            transition: background-color 0.3s;
+        }
+
+        .chat-item:hover {
+            background-color: #F5F5F5;
+            width: 100%;
         }
 
         .chat-item img {
@@ -204,15 +209,14 @@
             align-items: center;
             flex-grow: 1;
             overflow: hidden;
-            /* Hide overflow content */
         }
 
         .chat-item .chat-info .chat-name {
-            font-weight: bold;
+            font-weight: 500;
         }
 
         .chat-item .chat-info .chat-message {
-            color: #888;
+            color: #979797;
             font-size: 12px;
             font-weight: 300;
         }
@@ -222,50 +226,42 @@
             color: #888;
         }
 
-        .footer {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px 15px;
-            border-top: 1px solid #e0e0e0;
-            background-color: #fff;
-            width: 100%;
-            max-width: 480px;
-            position: fixed;
-            bottom: 0;
-            z-index: 1000;
-            box-sizing: border-box;
-            height: 60px;
+        .chat-info {
+            position: relative;
         }
 
-        .footer a {
-            text-decoration: none;
-            color: #000;
-        }
-
-        .footer div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .footer div i {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .img-profil {
+        .status {
+            position: absolute;
+            bottom: 0px;
+            left: 40px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
+            transform: translateY(-50%);
         }
 
-        .footer img {
-            width: 24px;
-            height: 24px;
-            margin-bottom: 5px;
+        .status.online {
+            background-color: #04BC00;
+        }
+
+        .status.offline {
+            background-color: #8B8B8B;
+        }
+
+        .chat-new {
+            position: absolute;
+            top: 19px;
+            right: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 500;
         }
     </style>
 
@@ -281,7 +277,6 @@
             overflow: hidden;
         }
 
-        /* Header Chat Styling */
         .header-chat {
             display: flex;
             justify-content: space-between;
@@ -414,7 +409,6 @@
             display: flex;
             align-items: center;
             top: 56px;
-            /* Sesuaikan dengan tinggi header-chat */
             z-index: 9;
             column-gap: 10px;
         }
@@ -772,7 +766,6 @@
         input[type="number"] {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 14px;
         }

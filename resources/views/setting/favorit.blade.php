@@ -23,7 +23,7 @@
             <!-- Tab 1: Produk & Jasa -->
             <div class="tab-content active" id="tab-1">
                 <div class="favorite-item">
-                    <img src="https://via.placeholder.com/100" alt="Produk">
+                    <img src="asset/images/dashboard/jasaanimasiwebsite.png" alt="Produk">
                     <div class="favorite-item-content">
                         <h3>Jasa animasi website interaktif javascript auto keren..</h3>
                         <p>Rp. 500.000</p>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="favorite-item">
-                    <img src="https://via.placeholder.com/100" alt="Produk">
+                    <img src="asset/images/dashboard/jasapembuatansistemecomerce.png" alt="Produk">
                     <div class="favorite-item-content">
                         <h3>Jasa pembuatan website e-commerce murah cepat..</h3>
                         <p>Rp. 500.000</p>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="favorite-item">
-                    <img src="https://via.placeholder.com/100" alt="Produk">
+                    <img src="asset/images/dashboard/keyboard_gaming.png" alt="Produk">
                     <div class="favorite-item-content">
                         <h3>Mekanik Keyboard Gaming dengan RGB Light Murah..</h3>
                         <p>Rp. 500.000</p>
@@ -57,9 +57,9 @@
             <!-- Tab 2: Misi -->
             <div class="tab-content" id="tab-2">
                 <div class="mission-item">
-                    <img src="https://via.placeholder.com/100" alt="Misi">
+                    <img src="asset/images/perusahaan/kredivo.png" alt="Misi">
                     <div class="favorite-mission">
-                        <h4>Misi 1: Mengembangkan Aplikasi AI</h4>
+                        <h4>Registrasi kredivo dan dapatkan</h4>
                         <div class="reward">
                             <p>Rp. 30.000</p>
                         </div>
@@ -73,9 +73,9 @@
                     </div>
                 </div>
                 <div class="mission-item">
-                    <img src="https://via.placeholder.com/100" alt="Misi">
+                    <img src="asset/images/perusahaan/flip.png" alt="Misi">
                     <div class="favorite-mission">
-                        <h4>Misi 2: Optimalisasi SEO Website</h4>
+                        <h4>Berikan FLIP ulasan & dapatkan</h4>
                         <div class="reward">
                             <p>Rp. 10.000</p>
                         </div>
@@ -89,11 +89,27 @@
                     </div>
                 </div>
                 <div class="mission-item">
-                    <img src="https://via.placeholder.com/100" alt="Misi">
+                    <img src="asset/images/perusahaan/bankmega.png" alt="Misi">
                     <div class="favorite-mission">
-                        <h4>Misi 3: Membuat Portal Pelanggan Baru</h4>
+                        <h4>Isi survey bank MEGA dan dapatkan</h4>
                         <div class="reward">
-                            <p>Rp. 10.000</p>
+                            <p>Rp. 50.000</p>
+                        </div>
+                        <div class="tiket">
+                            <p class="avabile">132</p>
+                            <p class="kuota">/200 Tiket</p>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="bi bi-bookmark-fill bookmark-btn"></i>
+                    </div>
+                </div>
+                <div class="mission-item">
+                    <img src="asset/images/perusahaan/tokopedia.png" alt="Misi">
+                    <div class="favorite-mission">
+                        <h4>Belanja minimal 50k dan dapatkan</h4>
+                        <div class="reward">
+                            <p>Rp. 25.000</p>
                         </div>
                         <div class="tiket">
                             <p class="avabile">132</p>
@@ -109,12 +125,12 @@
             <!-- Tab 3: Pekerjaan -->
             <div class="tab-content" id="tab-3">
                 <div class="job-item">
-                    <img src="https://via.placeholder.com/100" alt="Pekerjaan">
+                    <img src="asset/images/perusahaan/dicoding.png" alt="Pekerjaan">
                     <div class="favorite-jobs">
                         <div class="job-info">
                             <h4>Android Developer</h4>
                             <div class="company">
-                                <h5 class="company-name">Dicoding </h5>
+                                <h5 class="company-name"><i class="fa fa-check-circle verified-icon"></i>Dicoding</h5>
                                 <p class="address"> - Bandung, Jawa Barat</p>
                             </div>
                             <div class="salary">
@@ -128,12 +144,12 @@
                     </div>
                 </div>
                 <div class="job-item">
-                    <img src="https://via.placeholder.com/100" alt="Pekerjaan">
+                    <img src="asset/images/perusahaan/grab.png" alt="Pekerjaan">
                     <div class="favorite-jobs">
                         <div class="job-info">
                             <h4>Data Scientist </h4>
                             <div class="company">
-                                <h5 class="company-name">Grab</h5>
+                                <h5 class="company-name"><i class="fa fa-check-circle verified-icon"></i>Grab</h5>
                                 <p class="address"> - Bandung, Jawa Barat</p>
                             </div>
                             <div class="salary">
@@ -147,12 +163,12 @@
                     </div>
                 </div>
                 <div class="job-item">
-                    <img src="https://via.placeholder.com/100" alt="Pekerjaan">
+                    <img src="asset/images/perusahaan/sanber_code.png" alt="Pekerjaan">
                     <div class="favorite-jobs">
                         <div class="job-info">
                             <h4>Cyber Security</h4>
                             <div class="company">
-                                <h5 class="company-name">Sanbercode </h5>
+                                <h5 class="company-name"><i class="fa fa-check-circle verified-icon"></i>Sanbercode </h5>
                                 <p class="address"> - Bandung, Jawa Barat</p>
                             </div>
                             <div class="salary">

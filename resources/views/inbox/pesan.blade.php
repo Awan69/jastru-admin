@@ -4,12 +4,25 @@
 
 @section('konten')
 
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pesan</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    </head>
+
     <body>
         <div class="mobile-container">
             <div class="header-with-icons">
-                <a href="/beranda" class="back-button">
-                    <i class="fa fa-arrow-left"></i>
+                <a href="{{ route('dashboard_user') }}">
+                    <button class="back-button">
+                        <img src="asset/images/icon/backarrow.png" alt="Back">
+                    </button>
                 </a>
+                <h1 class="header-title">Pesan</h1>
                 <i class="right-icon">
                     <img src="{{ asset('asset/images/pesan/tandatanya.png') }}" alt="Help">
                 </i>
@@ -29,64 +42,43 @@
             <div class="chat-list hide-scrollbar">
                 <div class="search-filter-container">
                     <div class="filter-container">
-                        <button id="btn-unread">All</button>
+                        <button id="btn-unread" class="active">Semua</button>
                         <button id="btn-starred">Sudah dibaca</button>
                         <button id="btn-all">Belum dibaca</button>
                         <button id="btn-sub">Langganan</button>
                     </div>
                 </div>
-                <h6 class="fw-bolder">Chat Kamu</h6>
-                <div class="chat-item">
-                    <div class="chat-info">
-                        <img src="https://via.placeholder.com/50" alt="User">
-                        <div>
-                            <div class="chat-name">Asep koding</div>
-                            <div class="chat-message">Baik kak saya tunggu yaa 😊</div>
+                <div class="your-chat">Chat Kamu</div>
+                <div class="chat-container">
+                    <a href="{{ route('chat') }}" class="chat-item">
+                        <div class="hover-bg"></div>
+                        <div class="chat-info">
+                            <img src="asset/images/inbox_chat/pchat1.jpg" alt="User ">
+                            <div>
+                                <div class="chat-name">Asep koding</div>
+                                <div class="chat-message">Baik kak saya tunggu yaa 😊</div>
+                            </div>
+                            <div class="status online"></div>
                         </div>
-                    </div>
-                    <div class="chat-time">12 Aug</div>
+                        <div class="chat-time">12 Aug</div>
+                    </a>
+                    <a href="{{ route('chat') }}" class="chat-item">
+                        <div class="hover-bg"></div>
+                        <div class="chat-info">
+                            <img src="asset/images/inbox_chat/pchat2.jpg" alt="User ">
+                            <div>
+                                <div class="chat-name">Kepin design</div>
+                                <div class="chat-message">Waduh gabisa kak kalo segitu maaf yaaa 😢</div>
+                            </div>
+                            <div class="status offline"></div>
+                            <div class="chat-new">1</div>
+                        </div>
+                    </a>
                 </div>
-                <a href="{{ route('chat') }}" class="chat-item">
-                    <div class="chat-info">
-                        <img src="https://via.placeholder.com/50" alt="User">
-                        <div>
-                            <div class="chat-name">Kepin design</div>
-                            <div class="chat-message">Waduh gabisa kak kalo segitu maaf yaaa 😢</div>
-                        </div>
-                    </div>
-                    <div class="chat-time">1</div>
-                </a>
             </div>
             <section>
-                <div class="footer">
-                    <a href="{{ route('beranda') }}" class="footer-link">
-                        <div>
-                            <img src="asset/images/navigasi/beranda.png" alt="Beranda">
-                            <span>Beranda</span>
-                        </div>
-                    </a>
-                    <a href="{{ route('pesan') }}" class="footer-link">
-                        <div>
-                            <img src="asset/images/navigasi/chat_inbox.png" alt="Pesan">
-                            <span>Pesan</span>
-                        </div>
-                    </a>
-                    <div>
-                        <img src="asset/images/navigasi/profil.png" alt="Profile" class="img-profil">
-                        <span>Profile</span>
-                    </div>
-                    <a href="/pekerjaan2">
-                        <div>
-                            <img src="asset/images/navigasi/pekerjaan.png" alt="Pekerjaan">
-                            <span>Pekerjaan</span>
-                        </div>
-                    </a>
-                    <a href="{{ route('setting') }}" class="footer-link">
-                        <div>
-                            <img src="asset/images/navigasi/setting.png" alt="Setting">
-                            <span>Setting</span>
-                        </div>
-                    </a>
+                <div>
+                    @include('navbar.layout.nav_bar')
                 </div>
             </section>
         </div>

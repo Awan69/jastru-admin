@@ -62,6 +62,22 @@
                 <button class="transaction-item-income">
                     <img src="{{ asset('asset/images/icon/reepet.png') }}" alt="payment" class="transaction-icon-income">
                     <div class="transaction-detail-income">
+                        <p class="payment-description-income">Pembayaran oleh jerry</p>
+                        <p class="payment-date-income">12 Agustus 2024</p>
+                    </div>
+                    <p class="transaction-amount-income">+350.000</p>
+                </button>
+                <button class="transaction-item-income">
+                    <img src="{{ asset('asset/images/icon/reepet.png') }}" alt="payment" class="transaction-icon-income">
+                    <div class="transaction-detail-income">
+                        <p class="payment-description-income">Pembayaran oleh jerry</p>
+                        <p class="payment-date-income">12 Agustus 2024</p>
+                    </div>
+                    <p class="transaction-amount-income">+350.000</p>
+                </button>
+                <button class="transaction-item-income">
+                    <img src="{{ asset('asset/images/icon/reepet.png') }}" alt="payment" class="transaction-icon-income">
+                    <div class="transaction-detail-income">
                         <p class="payment-description-income">Pembayaran oleh irfan_m</p>
                         <p class="payment-date-income">12 Agustus 2024</p>
                     </div>
@@ -75,8 +91,9 @@
                     </div>
                     <p class="transaction-amount-income">+350.000</p>
                 </button>
-                <a href="/transaksi_pendapatan" class="see-more-link-income">Lihat lebih</a>
+
             </div>
+            <a href="/transaksi_pendapatan" class="see-more-link-income">Lihat lebih</a>
         </div>
     </body>
 

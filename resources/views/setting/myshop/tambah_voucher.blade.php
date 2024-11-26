@@ -6,7 +6,7 @@
 
     <body>
         <div class="mobile-container-rekening">
-            <header class="voucher-header">
+            <header class="voucher-header-tambah">
                 <a href="/voucher">
                     <button class="back-button">
                         <img src="{{ asset('asset/images/icon/backarrow.png') }}" alt="Back">
@@ -15,7 +15,7 @@
                 <h1>Buat Voucher</h1>
             </header>
 
-            <div class="voucher-content">
+            <div class="voucher-content-tambah">
                 <!-- Nama Voucher -->
                 <div class="voucher-section">
                     <div class="voucher-name">

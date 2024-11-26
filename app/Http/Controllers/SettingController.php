@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ExcitingMissionTicket;
+use App\Models\ExcitingMission;
+use Carbon\Carbon;
 
 class SettingController extends Controller
 {
@@ -126,6 +129,66 @@ class SettingController extends Controller
     {
         return view('setting.edit_no_phone', [
             'title' => 'Edit Nomber Phone',
+        ]);
+    }
+
+    public function verifikasi_nomor_telepon()
+    {
+        return view('setting.verifikasi_nomor_telepon', [
+            'title' => 'Verifikasi Nomor Telepon',
+        ]);
+    }
+
+    public function progressLamaranMisi()
+    {
+        $missions = ExcitingMission::with('partner')->get();
+
+        $userId = auth()->id();
+        $takenMissions = ExcitingMissionTicket::with('excitingMission.partner')
+            ->where('user_id', $userId)
+            ->get();
+
+        if ($takenMissions->isEmpty()) {
+            $takenMissions = collect();
+        }
+
+        foreach ($takenMissions as $takenMission) {
+            $endedDate = new Carbon($takenMission->excitingMission->end_date);
+            $currentDate = Carbon::now();
+
+
+            $formattedEndedDate = $endedDate->translatedFormat('j F Y');
+            $takenMission->formatted_ended_date = $formattedEndedDate;
+
+            if ($currentDate->lessThan($endedDate)) {
+                $days = floor($currentDate->diffInDays($endedDate));
+                $hours = floor($currentDate->diffInHours($endedDate) % 24);
+                $minutes = floor($currentDate->diffInMinutes($endedDate) % 60);
+                $seconds = floor($currentDate->diffInSeconds($endedDate) % 60);
+
+                // Buat string untuk format waktu sisa
+                if ($days > 0) {
+                    $remaining_time = "{$days} hari lagi";
+                } elseif ($hours > 0) {
+                    $remaining_time = "{$hours} jam lagi";
+                } elseif ($minutes > 0) {
+                    $remaining_time = "{$minutes} menit lagi";
+                } else {
+                    $remaining_time = "{$seconds} detik lagi";
+                }
+            } else {
+                // Jika tanggal telah lewat, set sisa waktu menjadi "Waktu telah habis"
+                $remaining_time = "Waktu telah habis";
+            }
+
+            // Simpan sisa waktu ke properti misi
+            $takenMission->remaining_days = $remaining_time;
+        }
+
+        // Kirim data ke view dengan tambahan sisa waktu
+        return view('setting.progress_lamaran_misi', [
+            'title' => 'Progress Lamaran & Misi',
+            'takenMissions' => $takenMissions,
         ]);
     }
 }

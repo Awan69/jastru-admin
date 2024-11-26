@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
         if ($role->name == 'super-admin' || $role->name == 'admin') {
             return redirect()->route('dashboard');
         } elseif ($role->name == 'staff' || $role->name == 'user') {
-            return redirect()->route('beranda');
+            return redirect()->route('dashboard_user');
         }
 
         // Default redirect if no role matches

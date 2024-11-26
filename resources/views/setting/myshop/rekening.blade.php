@@ -9,7 +9,7 @@
         <div class="mobile-container-rekening">
             <!-- Bagian Header -->
             <header class="rekening-header">
-                <img src="{{ asset('gambar/Kembali.png') }}" alt="Back">
+                <img src="{{ asset('gambar/Kembali.png') }}" alt="Back" onclick="history.back()">
                 <h1>Rekening Bank Saya</h1>
             </header>
 
@@ -68,6 +68,19 @@
                     </div>
                     <div class="card-rekening-lower">
                         <button class="lihat-detail" data-bank="CIMB Niaga">Lihat detail</button>
+                        <button class="hapus-rekening">Hapus rekening</button>
+                    </div>
+                </div>
+
+                <div class="card-rekening">
+                    <div class="card-rekening-upper btn-gradient">
+                        <div class="card-info">
+                            <span class="bank-name">BTN</span>
+                            <span class="account-number">10293847667</span>
+                        </div>
+                    </div>
+                    <div class="card-rekening-lower">
+                        <button class="lihat-detail" data-bank="BTN">Lihat detail</button>
                         <button class="hapus-rekening">Hapus rekening</button>
                     </div>
                 </div>

@@ -32,8 +32,26 @@
         </div>
     </div>
 
+    <!-- Modal untuk menampilkan gambar besar -->
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Gambar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="Gambar Besar" style="width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.7/js/jquery .dataTables.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     <script>
@@ -64,7 +82,26 @@
                     },
                     {
                         data: 'files',
-                        name: 'files'
+                        name: 'files',
+                        render: function(data, type, row) {
+                            if (data) {
+                                var fileUrl = "{{ asset('storage/bukti_pekerjaan') }}/" + data;
+                                var fileExtension = data.split('.').pop().toLowerCase();
+
+                                // Cek apakah file adalah gambar
+                                if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+                                    return '<img src="' + fileUrl +
+                                        '" alt="File" style="width: 100px; height: auto;" class="clickable-image" data-toggle="modal" data-target="#imageModal" data-image-url="' +
+                                        fileUrl + '">';
+                                } else {
+                                    // Jika bukan gambar, buat tautan unduh
+                                    return '<a href="' + fileUrl +
+                                        '" download style="color: blue; text-decoration: underline;">' +
+                                        data + '</a>';
+                                }
+                            }
+                            return 'No file';
+                        }
                     },
                     {
                         data: 'status',
@@ -78,6 +115,11 @@
                     }
                 ]
             });
+        });
+
+        $(document).on('click', '.clickable-image', function() {
+            var imageUrl = $(this).data('image-url');
+            $('#modalImage').attr('src', imageUrl);
         });
 
         function approveTicket(ticketId) {

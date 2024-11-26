@@ -25,7 +25,6 @@
                     <img src="{{ asset('gambar/sellertier_nonaktif.png') }}" alt="roadmap step" class="roadmap-step" data-tier="Seller 2" data-rating="4.8" data-response="90%" data-income="5 Jt" data-order="50">
                     <img src="{{ asset('gambar/sellertier_nonaktif.png') }}" alt="roadmap step" class="roadmap-step" data-tier="Seller Top Seller" data-rating="5.0" data-response="95%" data-income="10 Jt" data-order="100">
                 </div>
-
             </div>
 
             <!-- Seller Performance Section -->

@@ -36,14 +36,14 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="">Amount Mission</label>
                             <input type="number" name="amount_mission" value="{{ $partner->amount_mission }}"
                                 class="form-control" style="width: 100%" required />
                             @error('amount_mission')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label for="">Logo</label>
                             <input type="file" name="logo" class="form-control" style="width: 100%" />

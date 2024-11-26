@@ -15,7 +15,7 @@ class EmailVerificationNotificationController extends Controller
     {
         dd($request->all());
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('beranda', absolute: false));
+            return redirect()->intended(route('dashboard_user', absolute: false));
         }
 
         $request->user()->sendEmailVerificationNotification();
